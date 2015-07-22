@@ -19,7 +19,7 @@ deploy:
           ssh -l $DEPLOY_USER -o UserKnownHostsFile=/dev/null -tt -o StrictHostKeyChecking=no $DEPLOY_HOST /bin/bash -e <<EOF
           sudo dockerinstall.sh $WERCKER_GIT_REPO
           cd ./wanamu-db
-          sudo docker-compose run wanamudbmigration
+          sudo -E docker-compose run wanamudbmigration
           exit 0
           EOF
   after-steps:
