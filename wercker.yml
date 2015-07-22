@@ -19,8 +19,8 @@ deploy:
           ssh -l $DEPLOY_USER -o UserKnownHostsFile=/dev/null -tt -o StrictHostKeyChecking=no $DEPLOY_HOST /bin/bash -e <<EOF
           sudo dockerinstall.sh $WERCKER_GIT_REPO
           cd ./wanamu-db
-          sudo -E docker-compose run wanamudbmigration
-          exit 0
+          sudo -E docker-compose run -T wanamudbmigration
+          exit
           EOF
   after-steps:
     - slack-notifier:
