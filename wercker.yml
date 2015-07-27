@@ -21,8 +21,11 @@ deploy:
               git config --global user.email "wercker@wanamu.com"
               git config --global user.name "Wercker"
               echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+              `date` >> ./wercker.txt
+              $WERCKER_GIT_COMMIT >> ./wercker.txt
+              $WERCKER_BUILD_ID >> ./wercker.txt
               git add .
-              git commit --allow-empty -m "Wercker Push"
+              git commit -m "Wercker Push"
               git remote add deploy $DEPLOY_REPO_URL
               git push deploy HEAD:$DEPLOY_BRANCH --force
     after-steps:
