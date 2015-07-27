@@ -1,0 +1,4 @@
+wanamudbmigration:
+  build: .
+  external_links:
+    - wanamudb_wanamudb_1:db
