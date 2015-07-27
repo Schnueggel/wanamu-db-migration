@@ -22,8 +22,8 @@ deploy:
               git config --global user.name "Wercker"
               echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
               `date` >> ./wercker.txt
-              "$WERCKER_GIT_COMMIT" >> ./wercker.txt
-              "$WERCKER_BUILD_ID" >> ./wercker.txt
+              echo "$WERCKER_GIT_COMMIT" >> ./wercker.txt
+              echo "$WERCKER_BUILD_ID" >> ./wercker.txt
               git add .
               git commit -m "Wercker Push"
               git remote add deploy $DEPLOY_REPO_URL
