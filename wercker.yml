@@ -22,6 +22,7 @@ deploy:
               git config --global user.name "Wercker"
               echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
               git add .
+              git commit --allow-empty -m "Wercker Push"
               git remote add deploy $DEPLOY_REPO_URL
               git push deploy HEAD:$DEPLOY_BRANCH --force
     after-steps:
