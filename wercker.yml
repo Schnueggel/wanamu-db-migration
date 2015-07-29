@@ -14,16 +14,17 @@ deploy:
             name: install ssh
             code: |
               ssh-agent -s
+              echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
         - script:
             name: Deploy
             code: |
               git checkout $WERCKER_GIT_BRANCH
               git config --global user.email "wercker@wanamu.com"
               git config --global user.name "Wercker"
-              echo -e "Host $DEPLOY_HOST\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-              echo "$WERCKER_MAIN_PIPELINE_STARTED" >> ./wercker.txt
-              echo "$WERCKER_GIT_COMMIT" >> ./wercker.txt
-              echo "$WERCKER_BUILD_ID" >> ./wercker.txt
+              # Fix Wercker shallow clone
+              rm -rf  ./.git
+              git init
+              git checkout -b master
               git add .
               git commit -m "Wercker Push"
               git remote add deploy $DEPLOY_REPO_URL
